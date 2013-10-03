@@ -5,6 +5,7 @@
 package shiva.gauxam.com;
 
 import com.sun.lwuit.Display;
+import com.sun.lwuit.Form;
 import javax.microedition.midlet.*;
 
 /**
@@ -14,7 +15,8 @@ public class ShivaMidlet extends MIDlet {
 
     public void startApp() {
         Display.init(this);
-        
+        Form f=new Form("Shiva");
+        f.show();
     }
     
     public void pauseApp() {
