@@ -20,6 +20,13 @@ public class ShivaMidlet extends MIDlet {
 
     public void startApp() {
         Display.init(this);
+        Resources res = null;
+        try {
+            res = Resources.open("/gui/GUI_240x320.res");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        UIManager.getInstance().setThemeProps(res.getTheme("Connect_THEME"));
         UIBuilder b=new UIBuilder();
         b.setResourceFilePath("/gui/GUI_240x320.res");
         Form connect=b.showForm("Connect_GUI", null);
