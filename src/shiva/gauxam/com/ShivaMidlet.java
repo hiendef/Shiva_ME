@@ -15,11 +15,12 @@ public class ShivaMidlet extends MIDlet {
 
     public void startApp() {
         Display.init(this);
-        Form f=new Form("Shiva");
+        Form f=new Form("Shiva Application");
         f.show();
     }
     
     public void pauseApp() {
+        
     }
     
     public void destroyApp(boolean unconditional) {
