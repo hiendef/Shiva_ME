@@ -42,8 +42,13 @@ public class ShivaMidlet extends MIDlet {
         try {
             // connect to server_name: localhost_port: 9009
             DataInputStream dataIn= Connector.openDataInputStream(serverName+":"+serverPort);
-            if(dataIn!=null)
+            if(true)
             {
+                f=null;
+                f.repaint();
+                Display.init(this);
+                f=b.showForm("Gauxam_GUI", null);
+                f.show();
                 
             }
         } catch (IOException ex) {
