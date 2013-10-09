@@ -12,6 +12,7 @@ import com.sun.lwuit.util.UIBuilder;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Hashtable;
+import javax.microedition.io.Connection;
 import javax.microedition.io.Connector;
 import javax.microedition.midlet.*;
 
@@ -21,6 +22,7 @@ import javax.microedition.midlet.*;
 public class ShivaMidlet extends MIDlet {
     private String serverName;
     private String serverPort;
+    private Connection con;
     public ShivaMidlet()
     {
         this.serverName="http://127.0.0.1";
@@ -40,17 +42,10 @@ public class ShivaMidlet extends MIDlet {
         Form f=b.showForm("Connect_GUI", null);
         f.show();
         try {
-            // connect to server_name: localhost_port: 9009
-            DataInputStream dataIn= Connector.openDataInputStream(serverName+":"+serverPort);
-            if(true)
-            {
-                f=null;
-                f.repaint();
-                Display.init(this);
-                f=b.showForm("Gauxam_GUI", null);
-                f.show();
-                
-            }
+            con=Connector.open(serverName+":"+serverPort);
+            f=b.showForm("Gauxam_GUI", null);
+            f.removeAllCommands();
+            f.show();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
