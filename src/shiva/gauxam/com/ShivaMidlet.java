@@ -22,7 +22,7 @@ import javax.microedition.midlet.*;
 public class ShivaMidlet extends MIDlet {
     private String serverName;
     private String serverPort;
-    private Connection con;
+    private DataInputStream dataIn;
     public ShivaMidlet()
     {
         this.serverName="http://127.0.0.1";
@@ -42,12 +42,39 @@ public class ShivaMidlet extends MIDlet {
         Form f=b.showForm("Connect_GUI", null);
         f.show();
         try {
-            con=Connector.open(serverName+":"+serverPort);
-            f=b.showForm("Gauxam_GUI", null);
-            f.removeAllCommands();
-            f.show();
-        } catch (IOException ex) {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
             ex.printStackTrace();
+        }
+        try {
+            dataIn=(DataInputStream)Connector.openDataInputStream(serverName+":"+serverPort);
+            if(dataIn!=null)
+            {
+                f=b.showForm("Gauxam_GUI", null);
+                f.removeAllCommands();
+                f.show();
+            }
+            else
+            {
+                notifyDestroyed();
+            }
+            
+        } catch (IOException ex) {
+            try {
+                UIManager.getInstance().setThemeProps(Resources.open("/gui/GUI_240x320.res").getTheme("ErrorConnect_THEME"));
+                f=b.showForm("ErrorConnect_GUI", null);
+                f.removeAllCommands();
+                f.show();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex1) {
+                    ex1.printStackTrace();
+                }
+                notifyDestroyed();
+            } catch (IOException ex1) {
+                ex1.printStackTrace();
+            }
+            
         }
         
     }
